@@ -12,9 +12,9 @@
 
     <style>
         :root {
-            --primary: #0984e3;
-            --dark-bg: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.03);
+            --primary: #00a8ff;
+            --dark-bg: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
@@ -23,61 +23,87 @@
             background-color: var(--dark-bg);
             color: #ffffff;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
+        /* Animated Background */
         .bg-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 30%, #1e3799 0%, #0a0a0a 100%);
+            background: radial-gradient(circle at 10% 20%, #1e3799 0%, #050505 100%);
             z-index: -1;
         }
 
-        /* Hero & Profile */
+        /* Hero */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .profile-img {
-            width: 280px; height: 280px; border-radius: 50%;
+            width: 260px; height: 260px; border-radius: 50%;
             object-fit: cover; object-position: center 25%;
             border: 4px solid var(--primary);
-            box-shadow: 0 0 50px rgba(9, 132, 227, 0.3);
+            box-shadow: 0 0 40px rgba(0, 168, 255, 0.3);
         }
 
-        /* Skills Section */
-        .skill-badge {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 10px 20px;
-            border-radius: 12px;
-            margin: 5px;
-            display: inline-block;
-            transition: 0.3s;
+        /* Flip Card Logic */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 300px;
+            perspective: 1000px;
         }
-        .skill-badge:hover { border-color: var(--primary); transform: translateY(-3px); }
-        .skill-badge i { color: var(--primary); margin-right: 8px; }
 
-        /* Project Cards */
-        .project-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             border-radius: 20px;
-            overflow: hidden;
-            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            border: 1px solid var(--glass-border);
         }
-        .project-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.07);
+
+        .flip-card-front {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
         }
-        .project-info { padding: 30px; }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--primary), #1e3799);
+            color: white;
+            transform: rotateY(180deg);
+        }
 
         .section-title {
-            font-weight: 800; font-size: 2.8rem; margin-bottom: 3rem;
+            font-weight: 800; font-size: 2.5rem; margin-bottom: 3rem;
             background: linear-gradient(to right, #fff, var(--primary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
+        .skill-badge {
+            background: var(--glass); padding: 10px 20px; border-radius: 50px;
+            margin: 5px; border: 1px solid var(--glass-border); display: inline-block;
+        }
+
         .social-link {
-            width: 55px; height: 55px; display: inline-flex; align-items: center; justify-content: center;
-            background: var(--glass); border-radius: 50%; color: white;
-            font-size: 1.4rem; margin: 0 10px; transition: 0.3s; border: 1px solid var(--glass-border);
+            width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center;
+            background: var(--glass); border-radius: 50%; color: white; margin: 0 10px;
+            transition: 0.3s; border: 1px solid var(--glass-border); text-decoration: none;
         }
         .social-link:hover { background: var(--primary); transform: translateY(-5px); color: white; }
     </style>
@@ -88,10 +114,12 @@
 
     <header class="hero">
         <div class="container" data-aos="zoom-in">
-            <img src="profil.jpg.jpeg" alt="Fatih Tercüman" class="profile-img mb-4">
+            <img src="profil.jpg.jpeg" alt="Fatih" class="profile-img mb-4">
             <h1 class="display-3 fw-bold">Fatih Tercüman</h1>
-            <p class="lead opacity-75">Full Stack Solution Developer | .NET Specialist</p>
-            <a href="#projects" class="btn btn-primary btn-lg rounded-pill px-5 mt-4 fw-bold">My Portfolio</a>
+            <p class="lead opacity-75">Full Stack Developer | Solution Architect</p>
+            <div class="mt-4">
+                <a href="#projects" class="btn btn-outline-primary rounded-pill px-5 fw-bold">Explore My Projects</a>
+            </div>
         </div>
     </header>
 
@@ -100,22 +128,18 @@
             <div class="row g-5">
                 <div class="col-lg-6" data-aos="fade-right">
                     <h2 class="section-title text-start">About Me</h2>
-                    <p class="lead">I am a Solution Developer who focuses on creating value through code.</p>
-                    <p class="opacity-75">Specializing in the C# and .NET ecosystem, I build robust backend systems while ensuring high-quality frontend experiences. I believe in clean code, sustainable architecture, and continuous learning.</p>
-                    <div class="mt-4 border-start border-primary border-4 ps-3">
-                        <p class="mb-0 fw-bold">Atatürk University</p>
-                        <small class="text-primary">Bachelor's Degree (Lisans)</small>
-                    </div>
+                    <p class="lead">Focusing on creating value through sustainable architecture.</p>
+                    <p class="opacity-75">As a developer studying Recreation at Atatürk University, I merge discipline with technical expertise. I specialize in C#/.NET for robust backends and modern web technologies for high-end user experiences.</p>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
-                    <h2 class="section-title text-start">Core Skills</h2>
+                    <h2 class="section-title text-start">Tech Stack</h2>
                     <div class="d-flex flex-wrap">
-                        <div class="skill-badge"><i class="fa-solid fa-code"></i> C#</div>
-                        <div class="skill-badge"><i class="fa-solid fa-database"></i> SQL</div>
-                        <div class="skill-badge"><i class="fa-solid fa-server"></i> .NET / ASP.NET</div>
-                        <div class="skill-badge"><i class="fa-brands fa-js"></i> JavaScript</div>
-                        <div class="skill-badge"><i class="fa-brands fa-html5"></i> HTML5</div>
-                        <div class="skill-badge"><i class="fa-brands fa-css3-alt"></i> CSS3</div>
+                        <div class="skill-badge"><i class="fab fa-cuttlefish"></i> C#</div>
+                        <div class="skill-badge"><i class="fas fa-database"></i> SQL</div>
+                        <div class="skill-badge"><i class="fas fa-server"></i> .NET / ASP.NET</div>
+                        <div class="skill-badge"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="skill-badge"><i class="fab fa-html5"></i> HTML5</div>
+                        <div class="skill-badge"><i class="fab fa-css3-alt"></i> CSS3</div>
                     </div>
                 </div>
             </div>
@@ -124,52 +148,42 @@
 
     <section id="projects" class="py-5">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">Featured Projects</h2>
+            <h2 class="section-title text-center" data-aos="fade-up">Portfolio Projects</h2>
             <div class="row g-4">
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-card">
-                        <div class="project-info">
-                            <i class="fa-solid fa-cart-shopping mb-3 text-primary fs-2"></i>
-                            <h4>E-Commerce API</h4>
-                            <p class="small opacity-75">Advanced backend system with .NET Core & SQL Server.</p>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <i class="fas fa-shopping-cart mb-3 fs-1 text-primary"></i>
+                                <h4>E-Commerce Backend</h4>
+                                <p class="small opacity-75">Scalable .NET architecture.</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h5>Details</h5>
+                                <p>Integrated with MS SQL, featuring JWT Auth and Repository Pattern.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-card">
-                        <div class="project-info">
-                            <i class="fa-solid fa-chart-pie mb-3 text-primary fs-2"></i>
-                            <h4>Data Manager</h4>
-                            <p class="small opacity-75">Complex SQL querying and data visualization tool.</p>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <i class="fas fa-chart-line mb-3 fs-1 text-primary"></i>
+                                <h4>SQL Analytics</h4>
+                                <p class="small opacity-75">Data visualization tool.</p>
+                            </div>
+                            <div class="flip-card-back">
+                                <h5>Tech Used</h5>
+                                <p>Complex SQL procedures and Dapper for high-performance data fetching.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="project-card">
-                        <div class="project-info">
-                            <i class="fa-solid fa-layer-group mb-3 text-primary fs-2"></i>
-                            <h4>Full Stack Web</h4>
-                            <p class="small opacity-75">Responsive web application using ASP.NET & JS.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 text-center">
-        <div class="container" data-aos="zoom-in">
-            <h2 class="section-title">Connect With Me</h2>
-            <div class="d-flex justify-content-center mb-4">
-                <a href="https://www.linkedin.com/search/results/people/?origin=SEO_PSERP&firstName=%22Fatih%22&lastName=%22Terc%C3%BCman%22" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="https://x.com/fatihtercumann" target="_blank" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="mailto:fatihtercuman5353@gmail.com" class="social-link"><i class="fa-solid fa-envelope"></i></a>
-            </div>
-            <p class="opacity-75">fatihtercuman5353@gmail.com</p>
-        </div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>AOS.init({ duration: 1000, once: true });</script>
-</body>
-</html>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="300">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <i class="fas fa-code mb-3 fs-1 text-primary"></i>
+                                <h4>Custom CMS</h4>
+                                <p class="small opacity-75
