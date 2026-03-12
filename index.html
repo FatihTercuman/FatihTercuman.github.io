@@ -5,252 +5,241 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fatih Tercüman | Full Stack Solution Developer</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary-dark: #1a1a1a;
-            --accent-blue: #007bff;
-            --text-gray: #6c757d;
-            --bg-light: #f8f9fa;
+            --primary: #0984e3;
+            --dark: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: var(--primary-dark);
-            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Hero Section */
+        /* Arkaplan Animasyonu */
+        .bg-animate {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1e3799 0%, #0a0a0a 100%);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Hero & Profile Photo */
         .hero {
-            padding: 100px 0 60px;
-            background: radial-gradient(circle at top right, #eef2f3 0%, #ffffff 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
         }
 
-        .profile-container {
+        .profile-wrapper {
             position: relative;
             display: inline-block;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
         }
 
         .profile-img {
-            width: 250px;
-            height: 250px;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
             object-fit: cover;
-            /* Fotoğraftaki ağaç yoğunluğunu azaltmak için odağı aşağı (yüzüne) kaydırıyoruz */
-            object-position: center 35%; 
-            border: 8px solid white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            /* ÖNEMLİ: Fotoğrafı aşağı kaydırıp ağacı kesen ayar */
+            object-position: center 30%; 
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 50px rgba(9, 132, 227, 0.4);
+            transition: 0.5s;
         }
 
         .profile-img:hover {
-            transform: scale(1.02);
+            transform: scale(1.05) rotate(2deg);
         }
 
-        /* Badges & Skills */
-        .full-stack-badge {
-            background-color: var(--accent-blue);
-            color: white;
-            padding: 5px 15px;
+        .fullstack-tag {
+            background: var(--primary);
+            padding: 5px 20px;
             border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-bottom: 15px;
         }
 
-        .skill-card {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid #eee;
-            transition: all 0.3s ease;
-            text-align: center;
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: 0.4s;
             height: 100%;
         }
 
-        .skill-card:hover {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-color: var(--accent-blue);
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-10px);
+            border-color: var(--primary);
         }
 
-        .skill-icon {
+        /* Projeler Bölümü */
+        .project-icon {
             font-size: 2.5rem;
+            color: var(--primary);
             margin-bottom: 15px;
-            color: var(--accent-blue);
         }
 
-        /* About Section */
-        .about-text {
-            font-size: 1.1rem;
-            color: #444;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Connect Section */
-        .connect-section {
-            background-color: var(--primary-dark);
-            color: white;
-            padding: 80px 0;
-        }
-
-        .social-btn {
-            width: 60px;
-            height: 60px;
-            line-height: 60px;
-            display: inline-block;
-            background: rgba(255,255,255,0.1);
-            color: white;
+        /* Social Buttons */
+        .social-link {
+            width: 50px; height: 50px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--glass);
             border-radius: 50%;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: 0.3s;
-        }
-
-        .social-btn:hover {
-            background: var(--accent-blue);
             color: white;
-            transform: translateY(-5px);
-        }
-
-        .email-text {
-            color: #aaa;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: 0.3s;
             text-decoration: none;
-            font-weight: 300;
-            display: block;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        .edu-badge {
+            border-left: 3px solid var(--primary);
+            padding-left: 15px;
             margin-top: 20px;
         }
 
-        /* Timeline / Education */
-        .edu-box {
-            border-left: 3px solid var(--accent-blue);
-            padding-left: 20px;
-            margin-top: 20px;
-        }
-
-        footer {
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #999;
-            text-align: center;
+        .section-title {
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="container" data-aos="fade-down">
-            <div class="profile-container">
+    <div class="bg-animate"></div>
+
+    <header class="hero">
+        <div class="container" data-aos="zoom-in">
+            <div class="profile-wrapper">
                 <img src="WhatsApp Image 2026-03-12 at 10.28.54.jpeg" alt="Fatih Tercüman" class="profile-img">
             </div>
-            <div class="mt-3">
-                <span class="full-stack-badge">Full Stack Developer</span>
-                <h1 class="display-3 fw-bold">Fatih Tercüman</h1>
-                <p class="lead fw-light">Problem Çözen, Değer Üreten Yazılım Çözümleri</p>
+            <br>
+            <span class="fullstack-tag">Full Stack Developer</span>
+            <h1 class="display-2 fw-bold mt-3">Fatih Tercüman</h1>
+            <p class="lead opacity-75">Solution Developer | C# | .NET | SQL</p>
+            <div class="mt-4">
+                <a href="#projects" class="btn btn-outline-primary btn-lg rounded-pill px-5">Projelerimi Gör</a>
             </div>
         </div>
-    </section>
+    </header>
 
-    <section class="py-5">
+    <section class="py-5" id="about">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center" data-aos="fade-up">
-                    <h2 class="fw-bold mb-4">Hakkımda</h2>
-                    <p class="about-text">
-                        C# ve .NET ekosistemi başta olmak üzere <strong>backend</strong> geliştirme alanında uzmanlaşıyor; 
-                        <strong>SQL</strong> ile veri odaklı çözümler üretiyorum. Aynı zamanda frontend teknolojilerine hakim bir 
-                        <strong>Full Stack</strong> geliştirici olarak, yazdığım kodun kullanıcı deneyimine olan etkisini en üst düzeye çıkarmayı hedefliyorum.
-                    </p>
+            <div class="row g-5 align-items-center">
+                <div class="col-md-7" data-aos="fade-right">
+                    <h2 class="section-title text-start">Hakkımda</h2>
+                    <p class="lead">Yazılımı sadece kod yazmak olarak değil, <strong>problem çözme ve değer üretme sanatı</strong> olarak görüyorum.</p>
+                    <p class="opacity-75">C# ve .NET ekosisteminde derinleşirken, SQL ile veriyi yönetiyor, HTML/CSS ile kullanıcı deneyimini uçtan uca tasarlıyorum. Temiz kod ve sürdürülebilir mimari benim için bir standarttır.</p>
                     
-                    <div class="edu-box text-start mt-5 mx-auto" style="max-width: 500px;">
-                        <h5 class="fw-bold"><i class="fas fa-university me-2"></i> Eğitim</h5>
-                        <p class="mb-0">Atatürk Üniversitesi - Rekreasyon</p>
-                        <small class="text-primary fw-bold">Lisans Öğrencisi</small>
+                    <div class="edu-badge" data-aos="fade-up">
+                        <h5 class="mb-1">Atatürk Üniversitesi</h5>
+                        <p class="mb-0 text-primary fw-bold">Rekreasyon - Lisans</p>
+                    </div>
+                </div>
+                <div class="col-md-5" data-aos="fade-left">
+                    <div class="glass-card">
+                        <h4 class="mb-4">Öne Çıkan Yetenekler</h4>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-dark border p-2 px-3">C# / .NET Core</span>
+                            <span class="badge bg-dark border p-2 px-3">Entity Framework</span>
+                            <span class="badge bg-dark border p-2 px-3">MS SQL Server</span>
+                            <span class="badge bg-dark border p-2 px-3">REST API</span>
+                            <span class="badge bg-dark border p-2 px-3">HTML5 / CSS3 / JS</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-light py-5">
+    <section class="py-5 bg-black bg-opacity-25" id="projects">
         <div class="container">
-            <h3 class="text-center fw-bold mb-5" data-aos="fade-up">Teknoloji Odağım</h3>
+            <h2 class="section-title text-center" data-aos="fade-up">Projelerim</h2>
             <div class="row g-4">
-                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="skill-card">
-                        <i class="fas fa-code skill-icon"></i>
-                        <h5>C# & .NET</h5>
-                        <p class="small text-muted">Backend mimari ve servis geliştirme.</p>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
+                    <div class="glass-card">
+                        <i class="fas fa-shopping-cart project-icon"></i>
+                        <h4>E-Ticaret API</h4>
+                        <p class="small opacity-75">.NET Core ve SQL kullanılarak geliştirilen, SOLID prensiplerine uygun backend mimarisi.</p>
+                        <a href="#" class="btn btn-sm btn-link text-primary p-0">Detayları Gör →</a>
                     </div>
                 </div>
-                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="skill-card">
-                        <i class="fas fa-database skill-icon"></i>
-                        <h5>SQL</h5>
-                        <p class="small text-muted">Veri modelleme ve optimizasyon.</p>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+                    <div class="glass-card">
+                        <i class="fas fa-database project-icon"></i>
+                        <h4>Veri Analiz Paneli</h4>
+                        <p class="small opacity-75">Karmaşık SQL sorgularını görselleştiren, performans odaklı dashboard çözümü.</p>
+                        <a href="#" class="btn btn-sm btn-link text-primary p-0">Detayları Gör →</a>
                     </div>
                 </div>
-                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="skill-card">
-                        <i class="fas fa-laptop-code skill-icon"></i>
-                        <h5>Frontend</h5>
-                        <p class="small text-muted">HTML, CSS ve kullanıcı arayüzü.</p>
-                    </div>
-                </div>
-                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="skill-card">
-                        <i class="fas fa-check-double skill-icon"></i>
-                        <h5>Temiz Kod</h5>
-                        <p class="small text-muted">Sürdürülebilir ve esnek mimari.</p>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="300">
+                    <div class="glass-card">
+                        <i class="fas fa-network-wired project-icon"></i>
+                        <h4>Kurumsal Web Çözümü</h4>
+                        <p class="small opacity-75">Full Stack yaklaşımla geliştirilmiş, kullanıcı dostu arayüze sahip içerik yönetim sistemi.</p>
+                        <a href="#" class="btn btn-sm btn-link text-primary p-0">Detayları Gör →</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="connect-section text-center">
+    <section class="py-5 text-center">
         <div class="container" data-aos="fade-up">
-            <h2 class="fw-bold mb-4">Bağlantı Kuralım</h2>
-            <p class="mb-5 fw-light">Yeni projeler ve iş birlikleri için bana ulaşabilirsiniz.</p>
+            <h2 class="section-title">Bağlantıda Kalalım</h2>
+            <p class="opacity-75 mb-5">Bir proje fikriniz mi var veya sadece merhaba mı demek istiyorsunuz?</p>
             
-            <div class="d-flex justify-content-center">
-                <a href="https://www.linkedin.com/search/results/people/?origin=SEO_PSERP&firstName=%22Fatih%22&lastName=%22Terc%C3%BCman%22" target="_blank" class="social-btn" title="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://x.com/fatihtercumann" target="_blank" class="social-btn" title="Twitter / X">
-                    <i class="fab fa-x-twitter"></i>
-                </a>
-                <a href="mailto:fatihtercuman5353@gmail.com" class="social-btn" title="E-posta">
-                    <i class="fas fa-envelope"></i>
-                </a>
+            <div class="d-flex justify-content-center mb-5">
+                <a href="https://www.linkedin.com/search/results/people/?origin=SEO_PSERP&firstName=%22Fatih%22&lastName=%22Terc%C3%BCman%22" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://x.com/fatihtercumann" target="_blank" class="social-link"><i class="fab fa-x-twitter"></i></a>
+                <a href="mailto:fatihtercuman5353@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
             </div>
-
-            <a href="mailto:fatihtercuman5353@gmail.com" class="email-text">fatihtercuman5353@gmail.com</a>
+            
+            <p class="fw-bold">fatihtercuman5353@gmail.com</p>
         </div>
     </section>
 
-    <footer>
-        <p>© 2026 Fatih Tercüman. Tüm hakları saklıdır.</p>
+    <footer class="py-4 text-center opacity-50 small border-top border-secondary border-opacity-25">
+        &copy; 2026 Fatih Tercüman | Full Stack Developer Portfolyo
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        // Animasyonları başlat
         AOS.init({
             duration: 1000,
             once: true,
-            easing: 'ease-out-quad'
+            easing: 'ease-out-back'
         });
     </script>
 </body>
