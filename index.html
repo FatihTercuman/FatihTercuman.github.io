@@ -4,98 +4,254 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fatih Tercüman | Full Stack Solution Developer</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        :root { --main-color: #2d3436; --accent-color: #0984e3; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; overflow-x: hidden; }
-        
-        /* Navbar */
-        .navbar { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); }
-        
+        :root {
+            --primary-dark: #1a1a1a;
+            --accent-blue: #007bff;
+            --text-gray: #6c757d;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: var(--primary-dark);
+            line-height: 1.6;
+        }
+
         /* Hero Section */
-        .hero { 
-            padding: 120px 0 80px; 
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        .hero {
+            padding: 100px 0 60px;
+            background: radial-gradient(circle at top right, #eef2f3 0%, #ffffff 100%);
             text-align: center;
         }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
         .profile-img {
-            width: 220px; height: 220px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             object-fit: cover;
-            object-position: center 20%; /* Ağacı azaltıp seni öne çıkarmak için aşağı kaydırdık */
-            border: 5px solid white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            /* Fotoğraftaki ağaç yoğunluğunu azaltmak için odağı aşağı (yüzüne) kaydırıyoruz */
+            object-position: center 35%; 
+            border: 8px solid white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
 
-        /* Skills */
-        .skill-badge {
-            background: white; padding: 10px 20px; border-radius: 50px;
-            display: inline-block; margin: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .profile-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Badges & Skills */
+        .full-stack-badge {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+        }
+
+        .skill-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-color: var(--accent-blue);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-blue);
+        }
+
+        /* About Section */
+        .about-text {
+            font-size: 1.1rem;
+            color: #444;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Connect Section */
+        .connect-section {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .social-btn {
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50%;
+            margin: 0 10px;
+            font-size: 1.5rem;
             transition: 0.3s;
         }
-        .skill-badge:hover { transform: translateY(-5px); color: var(--accent-color); }
 
-        /* Sections */
-        section { padding: 80px 0; }
-        .section-title { font-weight: 700; margin-bottom: 40px; position: relative; }
-        .section-title::after { content: ''; width: 50px; height: 3px; background: var(--accent-color); position: absolute; bottom: -10px; left: 0; }
+        .social-btn:hover {
+            background: var(--accent-blue);
+            color: white;
+            transform: translateY(-5px);
+        }
 
-        /* Footer & Social */
-        .social-link { font-size: 24px; margin: 0 15px; color: var(--main-color); transition: 0.3s; }
-        .social-link:hover { color: var(--accent-color); }
+        .email-text {
+            color: #aaa;
+            text-decoration: none;
+            font-weight: 300;
+            display: block;
+            margin-top: 20px;
+        }
+
+        /* Timeline / Education */
+        .edu-box {
+            border-left: 3px solid var(--accent-blue);
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+
+        footer {
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #999;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <div class="container" data-aos="fade-up">
-            <img src="profil_fotografin.jpg" alt="Fatih Tercüman" class="profile-img">
-            <h1 class="display-4 fw-bold">Fatih Tercüman</h1>
-            <p class="lead text-primary fw-bold">Full Stack Solution Developer</p>
-            <p class="text-muted"><i class="fas fa-graduation-cap"></i> Atatürk Üniversitesi - Rekreasyon (Lisans)</p>
-        </div>
-    </header>
-
-    <section id="about" class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6" data-aos="fade-right">
-                <h2 class="section-title">Hakkımda</h2>
-                <p>Yazılıma merakla başlayan yolculuğumu, bugün disiplinli bir öğrenme süreci ve gerçek projelerle ilerlettiğim bir kariyere dönüştürüyorum. Kendimi yalnızca kod yazan biri değil, <strong>problemi anlayan ve doğru çözümü tasarlayan</strong> bir yazılımcı olarak konumlandırıyorum.</p>
-                <p>C# ve .NET ekosistemi başta olmak üzere backend geliştirme alanında çalışıyor; SQL ile veri odaklı çözümler üretiyorum. Full Stack perspektifiyle, yazdığım kodun kullanıcıya nasıl dokunduğunu da önemsiyorum.</p>
+    <section class="hero">
+        <div class="container" data-aos="fade-down">
+            <div class="profile-container">
+                <img src="WhatsApp Image 2026-03-12 at 10.28.54.jpeg" alt="Fatih Tercüman" class="profile-img">
             </div>
-            <div class="col-md-6" data-aos="fade-left">
-                <div class="p-4 bg-light rounded-4 shadow-sm">
-                    <h5>Neler Yapıyorum?</h5>
-                    <div class="mt-3">
-                        <div class="skill-badge"><i class="fab fa-cuttlefish text-primary"></i> C#</div>
-                        <div class="skill-badge"><i class="fas fa-code-branch text-info"></i> .NET</div>
-                        <div class="skill-badge"><i class="fas fa-database text-warning"></i> SQL</div>
-                        <div class="skill-badge"><i class="fab fa-html5 text-danger"></i> HTML/CSS</div>
-                        <div class="skill-badge"><i class="fas fa-layer-group text-success"></i> Full Stack Development</div>
+            <div class="mt-3">
+                <span class="full-stack-badge">Full Stack Developer</span>
+                <h1 class="display-3 fw-bold">Fatih Tercüman</h1>
+                <p class="lead fw-light">Problem Çözen, Değer Üreten Yazılım Çözümleri</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center" data-aos="fade-up">
+                    <h2 class="fw-bold mb-4">Hakkımda</h2>
+                    <p class="about-text">
+                        C# ve .NET ekosistemi başta olmak üzere <strong>backend</strong> geliştirme alanında uzmanlaşıyor; 
+                        <strong>SQL</strong> ile veri odaklı çözümler üretiyorum. Aynı zamanda frontend teknolojilerine hakim bir 
+                        <strong>Full Stack</strong> geliştirici olarak, yazdığım kodun kullanıcı deneyimine olan etkisini en üst düzeye çıkarmayı hedefliyorum.
+                    </p>
+                    
+                    <div class="edu-box text-start mt-5 mx-auto" style="max-width: 500px;">
+                        <h5 class="fw-bold"><i class="fas fa-university me-2"></i> Eğitim</h5>
+                        <p class="mb-0">Atatürk Üniversitesi - Rekreasyon</p>
+                        <small class="text-primary fw-bold">Lisans Öğrencisi</small>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-dark text-white text-center py-5">
-        <div class="container" data-aos="zoom-in">
-            <h2 class="mb-4">Bağlantıda Kalalım</h2>
-            <div class="d-flex justify-content-center mb-4">
-                <a href="mailto:fatihtercuman5353@gmail.com" class="social-link text-white"><i class="fas fa-envelope"></i></a>
-                <a href="https://x.com/fatihtercumann" target="_blank" class="social-link text-white"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://www.linkedin.com/search/results/people/?origin=SEO_PSERP&firstName=%22Fatih%22&lastName=%22Terc%C3%BCman%22" target="_blank" class="social-link text-white"><i class="fab fa-linkedin"></i></a>
+    <section class="bg-light py-5">
+        <div class="container">
+            <h3 class="text-center fw-bold mb-5" data-aos="fade-up">Teknoloji Odağım</h3>
+            <div class="row g-4">
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="skill-card">
+                        <i class="fas fa-code skill-icon"></i>
+                        <h5>C# & .NET</h5>
+                        <p class="small text-muted">Backend mimari ve servis geliştirme.</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="skill-card">
+                        <i class="fas fa-database skill-icon"></i>
+                        <h5>SQL</h5>
+                        <p class="small text-muted">Veri modelleme ve optimizasyon.</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="skill-card">
+                        <i class="fas fa-laptop-code skill-icon"></i>
+                        <h5>Frontend</h5>
+                        <p class="small text-muted">HTML, CSS ve kullanıcı arayüzü.</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="skill-card">
+                        <i class="fas fa-check-double skill-icon"></i>
+                        <h5>Temiz Kod</h5>
+                        <p class="small text-muted">Sürdürülebilir ve esnek mimari.</p>
+                    </div>
+                </div>
             </div>
-            <p class="mb-0">fatihtercuman5353@gmail.com</p>
         </div>
     </section>
 
+    <section class="connect-section text-center">
+        <div class="container" data-aos="fade-up">
+            <h2 class="fw-bold mb-4">Bağlantı Kuralım</h2>
+            <p class="mb-5 fw-light">Yeni projeler ve iş birlikleri için bana ulaşabilirsiniz.</p>
+            
+            <div class="d-flex justify-content-center">
+                <a href="https://www.linkedin.com/search/results/people/?origin=SEO_PSERP&firstName=%22Fatih%22&lastName=%22Terc%C3%BCman%22" target="_blank" class="social-btn" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://x.com/fatihtercumann" target="_blank" class="social-btn" title="Twitter / X">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="mailto:fatihtercuman5353@gmail.com" class="social-btn" title="E-posta">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+            <a href="mailto:fatihtercuman5353@gmail.com" class="email-text">fatihtercuman5353@gmail.com</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Fatih Tercüman. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true });
+        // Animasyonları başlat
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-quad'
+        });
     </script>
 </body>
 </html>
