@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
@@ -26,14 +26,12 @@
             scroll-behavior: smooth;
         }
 
-        /* Background Animation */
         .bg-animate {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 20% 30%, #1e3799 0%, #0a0a0a 100%);
             z-index: -1;
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -42,27 +40,16 @@
             text-align: center;
         }
 
-        .profile-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-
         .profile-img {
-            width: 300px;
-            height: 300px;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
             object-fit: cover;
-            /* Focus on your face, reducing the tree area above */
+            /* Ağacı kesip seni merkeze alır */
             object-position: center 25%; 
             border: 4px solid var(--primary);
-            box-shadow: 0 0 60px rgba(9, 132, 227, 0.3);
-            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 80px rgba(9, 132, 227, 0.5);
+            box-shadow: 0 0 50px rgba(9, 132, 227, 0.3);
+            transition: 0.6s;
         }
 
         .fullstack-tag {
@@ -75,33 +62,25 @@
             text-transform: uppercase;
         }
 
-        /* Glassmorphism Design */
         .glass-card {
             background: var(--glass);
             backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 40px;
-            transition: 0.4s ease;
+            transition: 0.4s;
             height: 100%;
-        }
-
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            transform: translateY(-12px);
-            border-color: var(--primary);
         }
 
         .section-title {
             font-weight: 800;
-            font-size: 3rem;
-            margin-bottom: 3.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
             background: linear-gradient(to right, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Social Icons */
         .social-link {
             width: 55px; height: 55px;
             display: inline-flex; align-items: center; justify-content: center;
@@ -122,17 +101,7 @@
             box-shadow: 0 10px 20px rgba(9, 132, 227, 0.3);
         }
 
-        .edu-badge {
-            border-left: 4px solid var(--primary);
-            padding-left: 20px;
-            margin-top: 30px;
-        }
-
-        .project-icon {
-            font-size: 2.8rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
+        .project-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -140,106 +109,61 @@
     <div class="bg-animate"></div>
 
     <header class="hero">
-        <div class="container" data-aos="zoom-out" data-aos-duration="1500">
-            <div class="profile-wrapper">
-                <img src="profil.jpg" alt="Fatih Tercüman" class="profile-img">
+        <div class="container" data-aos="zoom-out">
+            <div class="mb-4">
+                <img src="profil.jpg.jpeg" alt="Fatih Tercüman" class="profile-img">
             </div>
-            <div class="mt-2">
-                <span class="fullstack-tag">Full Stack Developer</span>
-                <h1 class="display-2 fw-bold mt-3">Fatih Tercüman</h1>
-                <p class="lead opacity-75">Solution Developer | .NET Specialist | Architecting Digital Value</p>
-                <div class="mt-5">
-                    <a href="#projects" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold">View My Projects</a>
-                </div>
+            <span class="fullstack-tag">Full Stack Developer</span>
+            <h1 class="display-3 fw-bold mt-3">Fatih Tercüman</h1>
+            <p class="lead opacity-75">Solution Developer | .NET Specialist</p>
+            <div class="mt-4">
+                <a href="#projects" class="btn btn-primary btn-lg rounded-pill px-5">View My Projects</a>
             </div>
         </div>
     </header>
 
-    <section class="py-5" id="about">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-7" data-aos="fade-right">
-                    <h2 class="section-title text-start">About Me</h2>
-                    <p class="lead">I don't just write code; I <strong>understand problems</strong> and <strong>architect precise solutions</strong>.</p>
-                    <p class="opacity-75 fs-5">Deeply focused on the C# and .NET ecosystem for backend excellence, while leveraging SQL for data-driven results. As a Full Stack developer, I prioritize how the code interacts with the end-user, ensuring seamless end-to-end performance.</p>
-                    
-                    <div class="edu-badge" data-aos="fade-up">
-                        <h4 class="mb-1">Atatürk University</h4>
-                        <p class="mb-0 text-primary fw-bold fs-5">Recreation - Bachelor's Degree (Lisans)</p>
-                    </div>
-                </div>
-                <div class="col-lg-5" data-aos="fade-left">
-                    <div class="glass-card">
-                        <h3 class="mb-4">Core Tech Stack</h3>
-                        <div class="d-flex flex-wrap gap-3">
-                            <span class="badge bg-primary p-3 px-4 rounded-pill fs-6">C# / .NET Core</span>
-                            <span class="badge bg-dark border p-3 px-4 rounded-pill fs-6">Entity Framework</span>
-                            <span class="badge bg-dark border p-3 px-4 rounded-pill fs-6">MS SQL Server</span>
-                            <span class="badge bg-dark border p-3 px-4 rounded-pill fs-6">Web API Development</span>
-                            <span class="badge bg-dark border p-3 px-4 rounded-pill fs-6">HTML5 / CSS3 / JS</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5" id="projects">
+    <section id="projects" class="py-5">
         <div class="container">
             <h2 class="section-title text-center" data-aos="fade-up">Portfolio Projects</h2>
             <div class="row g-4">
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-4">
                     <div class="glass-card text-center">
                         <i class="fas fa-layer-group project-icon"></i>
-                        <h4>Enterprise E-Commerce</h4>
-                        <p class="opacity-75">High-performance backend built with .NET Core, following SOLID principles and Clean Architecture.</p>
+                        <h4>E-Commerce Backend</h4>
+                        <p class="opacity-75">Scalable .NET Core architecture.</p>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-4">
                     <div class="glass-card text-center">
-                        <i class="fas fa-chart-line project-icon"></i>
-                        <h4>Data Analytics Dashboard</h4>
-                        <p class="opacity-75">Full Stack solution for visualizing complex SQL data structures into actionable business insights.</p>
+                        <i class="fas fa-database project-icon"></i>
+                        <h4>SQL Analytics</h4>
+                        <p class="opacity-75">Complex data visualization.</p>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-md-4">
                     <div class="glass-card text-center">
-                        <i class="fas fa-rocket project-icon"></i>
-                        <h4>Custom CMS Solution</h4>
-                        <p class="opacity-75">A scalable content management system designed for high availability and intuitive user experience.</p>
+                        <i class="fas fa-code project-icon"></i>
+                        <h4>Custom CMS</h4>
+                        <p class="opacity-75">Full Stack management system.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5 text-center bg-black bg-opacity-25">
+    <section class="py-5 text-center">
         <div class="container" data-aos="zoom-in">
             <h2 class="section-title">Let's Connect</h2>
-            <p class="opacity-75 mb-5 fs-5">Ready to build something meaningful? Get in touch.</p>
-            
             <div class="d-flex justify-content-center mb-5">
                 <a href="https://www.linkedin.com/search/results/people/?origin=SEO_PSERP&firstName=%22Fatih%22&lastName=%22Terc%C3%BCman%22" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://x.com/fatihtercumann" target="_blank" class="social-link"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://x.com/fatihtercumann" target="_blank" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
                 <a href="mailto:fatihtercuman5353@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
             </div>
-            
             <h4 class="fw-light">fatihtercuman5353@gmail.com</h4>
         </div>
     </section>
 
-    <footer class="py-5 text-center opacity-50 small">
-        &copy; 2026 Fatih Tercüman | All Rights Reserved.
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1200,
-            once: true,
-            easing: 'ease-in-out'
-        });
-    </script>
+    <script>AOS.init({ duration: 1200, once: true });</script>
 </body>
 </html>
