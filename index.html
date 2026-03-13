@@ -17,186 +17,170 @@
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
-        body {
+        body, html {
+            margin: 0; padding: 0;
             font-family: 'Poppins', sans-serif;
             background-color: var(--dark-bg);
             color: #ffffff;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Arkaplan Işığı */
-        .bg-glow {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 20%, #1e3799 0%, #050505 100%);
+        /* Vanta Background Container */
+        #vanta-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
         }
 
-        /* Hero */
-        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        /* Hero Section */
+        .hero { 
+            height: 100vh; 
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; 
+            text-align: center;
+            background: rgba(0,0,0,0.2);
+        }
+
         .profile-img {
-            width: 250px; height: 250px; border-radius: 50%;
-            object-fit: cover; object-position: center 25%;
-            border: 4px solid var(--primary);
-            box-shadow: 0 0 30px rgba(0, 168, 255, 0.3);
-            margin-bottom: 20px;
+            width: 200px; height: 200px; border-radius: 50%;
+            object-fit: cover; border: 4px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 168, 255, 0.4);
+            margin-bottom: 25px;
         }
 
-        /* Flip Card Tasarımı */
-        .card-container {
-            perspective: 1000px;
-            height: 320px;
-            margin-bottom: 30px;
-        }
-
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-
-        .card-container:hover .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: 0.3s;
         }
-
-        .card-front { background: var(--glass); backdrop-filter: blur(10px); }
-        .card-back {
-            background: linear-gradient(135deg, var(--primary), #1e3799);
-            color: white;
-            transform: rotateY(180deg);
-        }
+        .glass-card:hover { transform: translateY(-10px); border-color: var(--primary); }
 
         .section-title {
-            font-weight: 800; font-size: 2.5rem; margin: 50px 0;
+            font-weight: 800; font-size: 2.8rem; margin-bottom: 40px;
             background: linear-gradient(to right, #fff, var(--primary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-align: center;
+        }
+
+        /* Project Cards Styling */
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 15px;
+            transition: 0.3s;
+        }
+        .project-link:hover { color: #fff; }
+
+        .btn-custom {
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .skill-badge {
-            background: var(--glass); padding: 10px 20px; border-radius: 50px;
+            background: var(--glass); padding: 8px 18px; border-radius: 50px;
             margin: 5px; border: 1px solid var(--glass-border); display: inline-block;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        .social-link {
-            width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center;
-            background: var(--glass); border-radius: 50%; color: white; margin: 0 10px;
-            transition: 0.3s; border: 1px solid var(--glass-border); text-decoration: none;
+        .footer-social .social-link {
+            width: 45px; height: 45px; background: var(--glass);
+            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            color: white; margin: 0 10px; border: 1px solid var(--glass-border); transition: 0.3s;
         }
-        .social-link:hover { background: var(--primary); transform: translateY(-5px); }
-
-        .education-box {
-            background: var(--glass);
-            border-left: 5px solid var(--primary);
-            padding: 20px;
-            border-radius: 0 15px 15px 0;
-            margin-top: 20px;
-        }
+        .footer-social .social-link:hover { background: var(--primary); transform: scale(1.1); }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <div id="vanta-canvas"></div>
 
     <header class="hero">
         <img src="profil.jpg.jpeg" alt="Fatih" class="profile-img">
-        <h1 class="display-4 fw-bold">Fatih Tercüman</h1>
-        <p class="lead opacity-75">Full Stack Solution Developer | .NET Specialist</p>
-        <div class="mt-4">
-            <a href="#about" class="btn btn-outline-primary rounded-pill px-4 fw-bold">About Me</a>
-            <a href="#projects" class="btn btn-primary rounded-pill px-4 fw-bold ms-2">Projects</a>
+        <h1 class="display-3 fw-bold">Fatih Tercüman</h1>
+        <p class="lead opacity-75 mb-4">Software Architect | .NET Backend Specialist</p>
+        
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="#projects" class="btn btn-primary btn-custom"><i class="fa-solid fa-code me-2"></i> View Projects</a>
+            <a href="mailto:fatihtercuman5353@gmail.com" class="btn btn-outline-light btn-custom">Contact Me</a>
+            <a href="cv.pdf" download class="btn btn-success btn-custom"><i class="fa-solid fa-download me-2"></i> Download CV</a>
         </div>
     </header>
 
     <section id="about" class="container py-5">
-        <div class="row g-5">
+        <div class="row align-items-center">
             <div class="col-lg-7">
-                <h2 class="section-title text-start">About Me</h2>
-                <p class="lead">I focus on creating high-value systems through sustainable software architecture.</p>
-                <p class="opacity-75">As a developer, I bridge the gap between complex backend logic and user-centric frontend design. My goal is to build scalable, efficient, and clean solutions.</p>
-                
-                <div class="education-box">
-                    <h5 class="mb-1"><i class="fa-solid fa-graduation-cap me-2"></i> Atatürk University</h5>
-                    <p class="mb-3">Recreation - Bachelor's Degree</p>
-                    
-                    <h5 class="mb-1"><i class="fa-solid fa-certificate me-2"></i> ArıBilgi Education Institution</h5>
-                    <p class="mb-0 text-primary fw-bold">Full Stack Developer Certificate</p>
+                <h2 class="section-title">Hakkımda</h2>
+                <div class="glass-card">
+                    <p class="lead mb-3">Yazılım dünyasına 2022 yılında adım attım.</p>
+                    <p class="opacity-75">Backend sistemleri, veritabanı optimizasyonu ve yüksek performanslı API'lar geliştirme üzerine uzmanlaşıyorum. <b>Clean Architecture</b> ve <b>Scalable System Design</b> prensipleri, projelerimin temelini oluşturuyor. Sadece kod yazmıyor, çözüm üretiyorum.</p>
                 </div>
             </div>
-            <div class="col-lg-5">
-                <h2 class="section-title text-start">Tech Stack</h2>
+            <div class="col-lg-5 mt-4 mt-lg-0">
+                <h4 class="mb-3"><i class="fa-solid fa-layer-group text-primary me-2"></i> Tech Stack</h4>
                 <div class="d-flex flex-wrap">
-                    <div class="skill-badge"><i class="fa-solid fa-code me-2"></i> C#</div>
-                    <div class="skill-badge"><i class="fa-solid fa-server me-2"></i> .NET / ASP.NET</div>
-                    <div class="skill-badge"><i class="fa-solid fa-database me-2"></i> SQL</div>
-                    <div class="skill-badge"><i class="fa-brands fa-js me-2"></i> JavaScript</div>
-                    <div class="skill-badge"><i class="fa-brands fa-html5 me-2"></i> HTML5</div>
-                    <div class="skill-badge"><i class="fa-brands fa-css3-alt me-2"></i> CSS3</div>
+                    <div class="skill-badge">C# / .NET</div>
+                    <div class="skill-badge">SQL Server</div>
+                    <div class="skill-badge">Web API</div>
+                    <div class="skill-badge">Clean Architecture</div>
+                    <div class="skill-badge">JavaScript</div>
+                    <div class="skill-badge">Entity Framework</div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="projects" class="container py-5">
-        <h2 class="section-title">Portfolio Projects</h2>
-        <div class="row">
-            <div class="col-md-4 card-container">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <i class="fa-solid fa-cart-shopping mb-3 fs-1 text-primary"></i>
-                        <h4>E-Commerce API</h4>
-                        <p class="small opacity-75">Scalable .NET architecture.</p>
+        <h2 class="section-title text-center">Öne Çıkan Projeler</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="glass-card h-100">
+                    <i class="fa-solid fa-cart-shopping fs-1 text-primary mb-3"></i>
+                    <h3>E-Commerce API</h3>
+                    <p class="small opacity-75">Yüksek trafikli platformlar için tasarlanmış ölçeklenebilir backend mimarisi.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-dark">.NET Core</span> <span class="badge bg-dark">MSSQL</span>
                     </div>
-                    <div class="card-back">
-                        <h5>Backend Details</h5>
-                        <p>Built with Entity Framework Core, JWT Authentication, and Repository Pattern.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 card-container">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <i class="fa-solid fa-chart-line mb-3 fs-1 text-primary"></i>
-                        <h4>SQL Analytics</h4>
-                        <p class="small opacity-75">Data visualization tool.</p>
-                    </div>
-                    <div class="card-back">
-                        <h5>Database Tech</h5>
-                        <p>Optimization of complex queries and stored procedures for high-speed data reporting.</p>
+                    <div class="mt-auto">
+                        <a href="https://github.com/FatihTercuman" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                        <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 card-container">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <i class="fa-solid fa-laptop-code mb-3 fs-1 text-primary"></i>
-                        <h4>Custom CMS</h4>
-                        <p class="small opacity-75">Full Stack Solution.</p>
+            <div class="col-md-4">
+                <div class="glass-card h-100">
+                    <i class="fa-solid fa-chart-pie fs-1 text-primary mb-3"></i>
+                    <h3>SQL Analytics</h3>
+                    <p class="small opacity-75">Karmaşık verileri analiz eden ve raporlayan performans odaklı veri aracı.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-dark">C#</span> <span class="badge bg-dark">Stored Proc</span>
                     </div>
-                    <div class="card-back">
-                        <h5>Full Stack</h5>
-                        <p>Dynamic content management system using ASP.NET MVC and modern JS frameworks.</p>
+                    <div class="mt-auto">
+                        <a href="https://github.com/FatihTercuman" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                        <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="glass-card h-100">
+                    <i class="fa-solid fa-shield-halved fs-1 text-primary mb-3"></i>
+                    <h3>Auth Service</h3>
+                    <p class="small opacity-75">JWT tabanlı, güvenli ve merkezi yetkilendirme (Identity) servisi.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-dark">Security</span> <span class="badge bg-dark">Identity Core</span>
+                    </div>
+                    <div class="mt-auto">
+                        <a href="https://github.com/FatihTercuman" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                        <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
                     </div>
                 </div>
             </div>
@@ -204,14 +188,35 @@
     </section>
 
     <footer class="py-5 text-center">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="d-flex justify-content-center mb-4">
-            <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://x.com/fatihtercumann" target="_blank" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="mailto:fatihtercuman5353@gmail.com" class="social-link"><i class="fa-solid fa-envelope"></i></a>
+        <h2 class="section-title">İletişime Geçin</h2>
+        <div class="footer-social mb-4">
+            <a href="https://linkedin.com" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/FatihTercuman" class="social-link"><i class="fa-brands fa-github"></i></a>
+            <a href="https://x.com/fatihtercumann" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
         </div>
-        <p class="opacity-50 small">fatihtercuman5353@gmail.com</p>
+        <p class="opacity-50">© 2026 Fatih Tercüman. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    
+    <script>
+        // Arka plan animasyonunu başlatan kod
+        VANTA.WAVES({
+          el: "#vanta-canvas",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x0a0a0a,
+          shininess: 30.00,
+          waveHeight: 15.00,
+          waveSpeed: 0.50,
+          zoom: 0.85
+        })
+    </script>
 </body>
 </html>
