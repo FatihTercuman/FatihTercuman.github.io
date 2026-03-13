@@ -28,102 +28,66 @@
             overflow-x: hidden;
         }
 
-        /* Vanta Background */
         #vanta-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
         }
 
-        /* Hero */
-        .hero { 
-            height: 100vh; 
-            display: flex; flex-direction: column; 
-            align-items: center; justify-content: center; 
-            text-align: center;
-        }
+        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 
         .profile-img {
             width: 220px; height: 220px; border-radius: 50%;
             object-fit: cover; border: 4px solid var(--primary);
-            box-shadow: 0 0 30px rgba(0, 168, 255, 0.3);
-            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(0, 168, 255, 0.3); margin-bottom: 20px;
         }
 
-        /* Flip Card (Tersine Dönme Efekti) */
-        .card-container {
-            perspective: 1000px;
-            height: 350px;
-            margin-bottom: 30px;
-        }
-
-        .card-inner {
-            position: relative;
-            width: 100%; height: 100%;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-
-        .card-container:hover .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%; height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            border: 1px solid var(--glass-border);
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-        }
-
-        .card-back {
-            background: linear-gradient(135deg, var(--accent), var(--primary));
-            color: white;
-            transform: rotateY(180deg);
-            text-align: center;
-        }
-
-        /* UI Elements */
         .section-title {
-            font-weight: 800; font-size: 2.8rem; margin: 60px 0;
+            font-weight: 800; font-size: 2.8rem; margin-bottom: 40px;
             background: linear-gradient(to right, #fff, var(--primary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-align: center;
         }
 
-        .btn-custom {
-            border-radius: 50px; padding: 12px 35px;
-            font-weight: 600; transition: 0.3s;
-            text-transform: uppercase;
+        /* Tech Stack Progress Bars */
+        .skill-container { margin-bottom: 20px; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
+        .progress { 
+            height: 10px; background-color: var(--glass); border-radius: 10px; 
+            border: 1px solid var(--glass-border); overflow: visible;
+        }
+        .progress-bar {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            border-radius: 10px; box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
         }
 
-        .skill-badge {
-            background: var(--glass); padding: 10px 20px; border-radius: 50px;
-            margin: 5px; border: 1px solid var(--glass-border); display: inline-block;
+        /* Education & About Glass */
+        .glass-box {
+            background: var(--glass); backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px;
         }
 
-        .education-box {
-            background: var(--glass); border-left: 5px solid var(--primary);
-            padding: 25px; border-radius: 0 20px 20px 0; margin-top: 20px;
-        }
+        .education-item { border-left: 3px solid var(--primary); padding-left: 20px; margin-top: 20px; }
 
+        /* Flip Cards */
+        .card-container { perspective: 1000px; height: 350px; margin-bottom: 30px; }
+        .card-inner {
+            position: relative; width: 100%; height: 100%;
+            transition: transform 0.8s; transform-style: preserve-3d; cursor: pointer;
+        }
+        .card-container:hover .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            border-radius: 20px; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 30px; border: 1px solid var(--glass-border);
+            background: var(--glass); backdrop-filter: blur(10px);
+        }
+        .card-back { background: linear-gradient(135deg, var(--accent), var(--primary)); transform: rotateY(180deg); text-align: center; }
+
+        .btn-custom { border-radius: 50px; padding: 12px 35px; font-weight: 600; transition: 0.3s; }
         .social-link {
-            width: 50px; height: 50px; background: var(--glass);
-            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            width: 50px; height: 50px; background: var(--glass); border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
             color: white; margin: 0 10px; border: 1px solid var(--glass-border); transition: 0.3s;
         }
         .social-link:hover { background: var(--primary); transform: translateY(-5px); }
-
     </style>
 </head>
 <body>
@@ -131,7 +95,7 @@
     <div id="vanta-canvas"></div>
 
     <header class="hero">
-        <div class="reveal-top">
+        <div class="reveal-hero">
             <img src="profil.jpg.jpeg" alt="Fatih" class="profile-img">
             <h1 class="display-3 fw-bold">Fatih Tercüman</h1>
             <p class="lead opacity-75">Full Stack Solution Developer | .NET Specialist</p>
@@ -144,73 +108,84 @@
 
     <section id="about" class="container py-5">
         <div class="row g-5">
-            <div class="col-lg-7 reveal-left">
-                <h2 class="section-title text-start">Hakkımda</h2>
-                <p class="lead">Yazılım yolculuğuma 2022 yılında başladım.</p>
-                <p class="opacity-75">Backend sistemleri ve performans optimizasyonu üzerine yoğunlaşıyorum. Clean Architecture ve ölçeklenebilir sistem tasarımı sadece işim değil, tutkumdur.</p>
-                
-                <div class="education-box">
-                    <h5 class="mb-1"><i class="fa-solid fa-graduation-cap me-2"></i> Atatürk University</h5>
-                    <p class="mb-3 opacity-75">Recreation - Bachelor's Degree</p>
-                    <h5 class="mb-1"><i class="fa-solid fa-certificate me-2"></i> ArıBilgi</h5>
-                    <p class="mb-0 text-primary fw-bold">Full Stack Developer Certificate</p>
+            <div class="col-lg-6 reveal-about">
+                <h2 class="section-title">Hakkımda</h2>
+                <div class="glass-box h-100">
+                    <p class="lead">Yazılım dünyasına 2022 yılında profesyonel olarak adım attım.</p>
+                    <p class="opacity-75">Backend sistemleri ve performans optimizasyonu üzerine yoğunlaşıyorum. Clean Architecture ve scalable system design temel çalışma prensibimdir.</p>
+                    
+                    <h4 class="mt-4 mb-3"><i class="fa-solid fa-user-graduate me-2"></i> Education</h4>
+                    <div class="education-item">
+                        <h6 class="mb-0 text-primary">Atatürk University (AÖF)</h6>
+                        <p class="mb-2 small">Recreation - Bachelor's Degree (Lisans)</p>
+                        <h6 class="mb-0 text-primary">ArıBilgi Education Institution</h6>
+                        <p class="mb-0 small">Full Stack Developer Certification</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-5 reveal-right">
-                <h2 class="section-title text-start">Tech Stack</h2>
-                <div class="d-flex flex-wrap">
-                    <div class="skill-badge"><i class="fa-solid fa-code me-2"></i> C#</div>
-                    <div class="skill-badge"><i class="fa-solid fa-server me-2"></i> .NET</div>
-                    <div class="skill-badge"><i class="fa-solid fa-database me-2"></i> SQL</div>
-                    <div class="skill-badge"><i class="fa-brands fa-js me-2"></i> JavaScript</div>
-                    <div class="skill-badge">Clean Architecture</div>
-                    <div class="skill-badge">Entity Framework</div>
+
+            <div class="col-lg-6 reveal-tech">
+                <h2 class="section-title">Tech Stack</h2>
+                <div class="glass-box h-100">
+                    <div class="skill-container">
+                        <div class="skill-info"><span>C# / .NET Core</span><span>95%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 95%"></div></div>
+                    </div>
+                    <div class="skill-container">
+                        <div class="skill-info"><span>SQL Server / PostgreSQL</span><span>90%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 90%"></div></div>
+                    </div>
+                    <div class="skill-container">
+                        <div class="skill-info"><span>JavaScript / HTML5 / CSS3</span><span>85%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 85%"></div></div>
+                    </div>
+                    <div class="skill-container">
+                        <div class="skill-info"><span>Clean Architecture / SOLID</span><span>90%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 90%"></div></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="projects" class="container py-5">
-        <h2 class="section-title">Projelerim</h2>
+        <h2 class="section-title text-center">Projects</h2>
         <div class="row">
-            <div class="col-md-4 card-container reveal-bottom">
+            <div class="col-md-4 card-container reveal-project">
                 <div class="card-inner">
                     <div class="card-front">
                         <i class="fa-solid fa-cart-shopping mb-3 fs-1 text-primary"></i>
                         <h4>E-Commerce API</h4>
-                        <p class="small opacity-75">Sustainable .NET Architecture</p>
                     </div>
                     <div class="card-back">
-                        <h5>Teknik Detaylar</h5>
-                        <p>EF Core, JWT ve Repository Pattern kullanılarak geliştirilmiş yüksek performanslı API.</p>
+                        <h5>Backend</h5>
+                        <p>EF Core & JWT Authentication</p>
                         <a href="#" class="btn btn-sm btn-light rounded-pill">Github</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 card-container reveal-bottom">
+            <div class="col-md-4 card-container reveal-project">
                 <div class="card-inner">
                     <div class="card-front">
-                        <i class="fa-solid fa-chart-line mb-3 fs-1 text-primary"></i>
+                        <i class="fa-solid fa-database mb-3 fs-1 text-primary"></i>
                         <h4>SQL Analytics</h4>
-                        <p class="small opacity-75">Data Visualization Tool</p>
                     </div>
                     <div class="card-back">
-                        <h5>Veri Yönetimi</h5>
-                        <p>Karmaşık sorguların optimizasyonu ve veri görselleştirme dashboard projeleri.</p>
+                        <h5>Data Tool</h5>
+                        <p>Optimization & Reporting</p>
                         <a href="#" class="btn btn-sm btn-light rounded-pill">Github</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 card-container reveal-bottom">
+            <div class="col-md-4 card-container reveal-project">
                 <div class="card-inner">
                     <div class="card-front">
-                        <i class="fa-solid fa-laptop-code mb-3 fs-1 text-primary"></i>
-                        <h4>Portfolio V2</h4>
-                        <p class="small opacity-75">Interactive UI/UX</p>
+                        <i class="fa-solid fa-code-merge mb-3 fs-1 text-primary"></i>
+                        <h4>Custom CMS</h4>
                     </div>
                     <div class="card-back">
                         <h5>Full Stack</h5>
-                        <p>Modern animasyonlar ve cam morfolojisi (glassmorphism) ile geliştirilmiş kişisel portfolyo.</p>
+                        <p>Dynamic Content Management</p>
                         <a href="#" class="btn btn-sm btn-light rounded-pill">Github</a>
                     </div>
                 </div>
@@ -218,11 +193,11 @@
         </div>
     </section>
 
-    <footer id="contact" class="py-5 text-center reveal-bottom">
+    <footer id="contact" class="py-5 text-center reveal-footer">
         <h2 class="section-title">Let's Connect</h2>
         <div class="d-flex justify-content-center mb-4">
             <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://x.com/fatihtercumann" target="_blank" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://github.com/FatihTercuman" target="_blank" class="social-link"><i class="fa-brands fa-github"></i></a>
             <a href="mailto:fatihtercuman5353@gmail.com" class="social-link"><i class="fa-solid fa-envelope"></i></a>
         </div>
         <p class="opacity-50">fatihtercuman5353@gmail.com</p>
@@ -232,21 +207,21 @@
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
     
     <script>
-        // Arka Plan
+        // Vanta Background
         VANTA.WAVES({
-          el: "#vanta-canvas",
-          mouseControls: true, touchControls: true,
-          minHeight: 200.00, minWidth: 200.00,
-          scale: 1.00, scaleMobile: 1.00,
-          color: 0x050505, shininess: 35.00,
-          waveHeight: 15.00, waveSpeed: 0.60, zoom: 0.90
+          el: "#vanta-canvas", mouseControls: true, touchControls: true,
+          minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
+          color: 0x050505, shininess: 35.00, waveHeight: 15.00, waveSpeed: 0.60, zoom: 0.90
         })
 
-        // Animasyonlar (Scroll Reveal)
-        ScrollReveal().reveal('.reveal-top', { delay: 200, origin: 'top', distance: '50px' });
-        ScrollReveal().reveal('.reveal-bottom', { delay: 300, origin: 'bottom', distance: '50px', interval: 200 });
-        ScrollReveal().reveal('.reveal-left', { delay: 200, origin: 'left', distance: '80px' });
-        ScrollReveal().reveal('.reveal-right', { delay: 200, origin: 'right', distance: '80px' });
+        // Scroll Animations
+        const sr = ScrollReveal({ origin: 'bottom', distance: '60px', duration: 1200, delay: 200, reset: false });
+
+        sr.reveal('.reveal-hero');
+        sr.reveal('.reveal-about', { origin: 'left' });
+        sr.reveal('.reveal-tech', { origin: 'right' });
+        sr.reveal('.reveal-project', { interval: 200 });
+        sr.reveal('.reveal-footer');
     </script>
 </body>
 </html>
