@@ -1,227 +1,536 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fatih Tercüman | Full Stack Developer</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://unpkg.com/scrollreveal"></script>
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* === GENEL AYARLAR VE RENKLER === */
         :root {
-            --primary: #00a8ff;
-            --dark-bg: #0a0a0a;
-            --accent: #1e3799;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary-color: #3b82f6;
+            --secondary-color: #8b5cf6;
+            --card-bg: rgba(30, 41, 59, 0.7);
         }
 
-        body, html {
-            margin: 0; padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-bg);
-            color: #ffffff;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
             overflow-x: hidden;
         }
 
-        #vanta-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        /* Arka plan animasyonlu şekiller */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+        .shape.s1 { width: 300px; height: 300px; background: var(--primary-color); top: -10%; left: -10%; }
+        .shape.s2 { width: 400px; height: 400px; background: var(--secondary-color); bottom: -10%; right: -10%; animation-delay: -5s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
         }
 
-        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-
-        .profile-img {
-            width: 220px; height: 220px; border-radius: 50%;
-            object-fit: cover; border: 4px solid var(--primary);
-            box-shadow: 0 0 30px rgba(0, 168, 255, 0.3); margin-bottom: 20px;
+        /* === YARDIMCI SINIFLAR === */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-
         .section-title {
-            font-weight: 800; font-size: 2.8rem; margin-bottom: 40px;
-            background: linear-gradient(to right, #fff, var(--primary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        section {
+            padding: 100px 0;
         }
 
-        /* Tech Stack Progress Bars */
-        .skill-container { margin-bottom: 20px; }
-        .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
-        .progress { 
-            height: 10px; background-color: var(--glass); border-radius: 10px; 
-            border: 1px solid var(--glass-border); overflow: visible;
+        /* === NAVBAR === */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: 0.3s;
         }
-        .progress-bar {
-            background: linear-gradient(to right, var(--accent), var(--primary));
-            border-radius: 10px; box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        nav ul li a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: var(--primary-color);
         }
 
-        /* Education & About Glass */
-        .glass-box {
-            background: var(--glass); backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px;
+        /* === HERO BÖLÜMÜ === */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-content {
+            width: 100%;
+        }
+        .hero img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box, 
+                        linear-gradient(to right, var(--primary-color), var(--secondary-color)) border-box;
+            margin-bottom: 20px;
+            animation: profileFloat 4s infinite ease-in-out;
+        }
+        @keyframes profileFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        .typewriter {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            min-height: 35px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
         }
 
-        .education-item { border-left: 3px solid var(--primary); padding-left: 20px; margin-top: 20px; }
+        /* === HAKKIMDA BÖLÜMÜ === */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+        .glass-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .glass-card p, .glass-card ul {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .glass-card ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+        .glass-card ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .glass-card ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
 
-        /* Flip Cards */
-        .card-container { perspective: 1000px; height: 350px; margin-bottom: 30px; }
-        .card-inner {
-            position: relative; width: 100%; height: 100%;
-            transition: transform 0.8s; transform-style: preserve-3d; cursor: pointer;
+        /* === YETENEKLER === */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .card-container:hover .card-inner { transform: rotateY(180deg); }
-        .card-front, .card-back {
-            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
-            border-radius: 20px; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: 30px; border: 1px solid var(--glass-border);
-            background: var(--glass); backdrop-filter: blur(10px);
+        .skill-box {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .card-back { background: linear-gradient(135deg, var(--accent), var(--primary)); transform: rotateY(180deg); text-align: center; }
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .skill-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 5px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
 
-        .btn-custom { border-radius: 50px; padding: 12px 35px; font-weight: 600; transition: 0.3s; }
-        .social-link {
-            width: 50px; height: 50px; background: var(--glass); border-radius: 50%;
-            display: inline-flex; align-items: center; justify-content: center;
-            color: white; margin: 0 10px; border: 1px solid var(--glass-border); transition: 0.3s;
+        /* === PROJELER === */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
-        .social-link:hover { background: var(--primary); transform: translateY(-5px); }
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .project-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .project-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
+        }
+        .project-card a:hover {
+            color: var(--secondary-color);
+            gap: 10px;
+        }
+
+        /* === İLETİŞİM === */
+        .contact {
+            text-align: center;
+        }
+        .contact .glass-card {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-main);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        /* === ANİMASYON SINIFLARI (SCROLL İÇİN) === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            nav ul { display: none; /* Mobilde hamburger menü yapılabilir */ }
+        }
     </style>
 </head>
 <body>
 
-    <div id="vanta-canvas"></div>
+    <div class="bg-shapes">
+        <div class="shape s1"></div>
+        <div class="shape s2"></div>
+    </div>
 
-    <header class="hero">
-        <div class="reveal-hero">
-            <img src="profil.jpg.jpeg" alt="Fatih" class="profile-img">
-            <h1 class="display-3 fw-bold">Fatih Tercüman</h1>
-            <p class="lead opacity-75">Full Stack Solution Developer | .NET Specialist</p>
-            <div class="mt-4">
-                <a href="#projects" class="btn btn-outline-primary btn-custom">View Projects</a>
-                <a href="#contact" class="btn btn-primary btn-custom ms-2">Contact Me</a>
-            </div>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">FT.</a>
+            <ul>
+                <li><a href="#about">Hakkımda</a></li>
+                <li><a href="#skills">Yetenekler</a></li>
+                <li><a href="#projects">Projeler</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
-    <section id="about" class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-6 reveal-about">
-                <h2 class="section-title">Hakkımda</h2>
-                <div class="glass-box h-100">
-                    <p class="lead">Yazılım dünyasına 2022 yılında profesyonel olarak adım attım.</p>
-                    <p class="opacity-75">Backend sistemleri ve performans optimizasyonu üzerine yoğunlaşıyorum. Clean Architecture ve scalable system design temel çalışma prensibimdir.</p>
-                    
-                    <h4 class="mt-4 mb-3"><i class="fa-solid fa-user-graduate me-2"></i> Education</h4>
-                    <div class="education-item">
-                        <h6 class="mb-0 text-primary">Atatürk University (AÖF)</h6>
-                        <p class="mb-2 small">Recreation - Bachelor's Degree (Lisans)</p>
-                        <h6 class="mb-0 text-primary">ArıBilgi Education Institution</h6>
-                        <p class="mb-0 small">Full Stack Developer Certification</p>
-                    </div>
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <img src="profil.jpg.jpeg" alt="Fatih Tercüman">
+            <h1>Fatih Tercüman</h1>
+            <div class="typewriter" id="typewriter"></div>
+            <a href="#projects" class="btn">Projelerimi Gör</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title reveal">Hakkımda</h2>
+            <div class="about-grid">
+                <div class="glass-card reveal">
+                    <h3>Kariyer</h3>
+                    <p>Yazılım dünyasına 2022 yılında profesyonel olarak adım attım. Backend sistemleri ve performans optimizasyonu üzerine yoğunlaşıyorum. <strong>Clean Architecture</strong> ve scalable system design temel çalışma prensibimdir.</p>
                 </div>
-            </div>
-
-            <div class="col-lg-6 reveal-tech">
-                <h2 class="section-title">Tech Stack</h2>
-                <div class="glass-box h-100">
-                    <div class="skill-container">
-                        <div class="skill-info"><span>C# / .NET Core</span><span>95%</span></div>
-                        <div class="progress"><div class="progress-bar" style="width: 95%"></div></div>
-                    </div>
-                    <div class="skill-container">
-                        <div class="skill-info"><span>SQL Server / PostgreSQL</span><span>90%</span></div>
-                        <div class="progress"><div class="progress-bar" style="width: 90%"></div></div>
-                    </div>
-                    <div class="skill-container">
-                        <div class="skill-info"><span>JavaScript / HTML5 / CSS3</span><span>85%</span></div>
-                        <div class="progress"><div class="progress-bar" style="width: 85%"></div></div>
-                    </div>
-                    <div class="skill-container">
-                        <div class="skill-info"><span>Clean Architecture / SOLID</span><span>90%</span></div>
-                        <div class="progress"><div class="progress-bar" style="width: 90%"></div></div>
-                    </div>
+                <div class="glass-card reveal" style="transition-delay: 0.2s;">
+                    <h3>Eğitim</h3>
+                    <ul>
+                        <li>
+                            <strong>Atatürk University (AÖF)</strong><br>
+                            Recreation - Bachelor's Degree (Lisans)
+                        </li>
+                        <li>
+                            <strong>ArıBilgi Education Institution</strong><br>
+                            Full Stack Developer Certification
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="container py-5">
-        <h2 class="section-title text-center">Projects</h2>
-        <div class="row">
-            <div class="col-md-4 card-container reveal-project">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <i class="fa-solid fa-cart-shopping mb-3 fs-1 text-primary"></i>
-                        <h4>E-Commerce API</h4>
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title reveal">Tech Stack</h2>
+            <div class="skills-container">
+                
+                <div class="skill-box reveal">
+                    <div class="skill-info">
+                        <span>C# / .NET Core</span>
+                        <span>95%</span>
                     </div>
-                    <div class="card-back">
-                        <h5>Backend</h5>
-                        <p>EF Core & JWT Authentication</p>
-                        <a href="#" class="btn btn-sm btn-light rounded-pill">Github</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 card-container reveal-project">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <i class="fa-solid fa-database mb-3 fs-1 text-primary"></i>
-                        <h4>SQL Analytics</h4>
-                    </div>
-                    <div class="card-back">
-                        <h5>Data Tool</h5>
-                        <p>Optimization & Reporting</p>
-                        <a href="#" class="btn btn-sm btn-light rounded-pill">Github</a>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="95%"></div>
                     </div>
                 </div>
+
+                <div class="skill-box reveal">
+                    <div class="skill-info">
+                        <span>SQL Server / PostgreSQL</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-box reveal">
+                    <div class="skill-info">
+                        <span>Clean Architecture / SOLID</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-box reveal">
+                    <div class="skill-info">
+                        <span>JavaScript / HTML5 / CSS3</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85%"></div>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-4 card-container reveal-project">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <i class="fa-solid fa-code-merge mb-3 fs-1 text-primary"></i>
-                        <h4>Custom CMS</h4>
-                    </div>
-                    <div class="card-back">
-                        <h5>Full Stack</h5>
-                        <p>Dynamic Content Management</p>
-                        <a href="#" class="btn btn-sm btn-light rounded-pill">Github</a>
-                    </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title reveal">Projeler</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card reveal">
+                    <h3>E-Commerce API</h3>
+                    <p><strong>Backend:</strong> EF Core & JWT Authentication kullanılarak geliştirilmiş güvenli ve ölçeklenebilir e-ticaret altyapısı.</p>
+                    <a href="#">Github <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.2s;">
+                    <h3>SQL Analytics</h3>
+                    <p><strong>Data Tool:</strong> Veritabanı optimizasyonu ve detaylı raporlama işlemleri için geliştirilmiş analiz aracı.</p>
+                    <a href="#">Github <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.4s;">
+                    <h3>Custom CMS</h3>
+                    <p><strong>Full Stack:</strong> Dinamik içerik yönetimi sağlayan, kullanıcı dostu özel içerik yönetim sistemi.</p>
+                    <a href="#">Github <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title reveal">Let's Connect</h2>
+            <div class="glass-card reveal">
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">Projeleriniz veya işbirlikleri için benimle iletişime geçebilirsiniz.</p>
+                <a href="mailto:fatihtercuman5353@gmail.com" class="btn" style="font-size: 1.1rem;">fatihtercuman5353@gmail.com</a>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="py-5 text-center reveal-footer">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="d-flex justify-content-center mb-4">
-            <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://github.com/FatihTercuman" target="_blank" class="social-link"><i class="fa-brands fa-github"></i></a>
-            <a href="mailto:fatihtercuman5353@gmail.com" class="social-link"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-        <p class="opacity-50">fatihtercuman5353@gmail.com</p>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-    
     <script>
-        // Vanta Background
-        VANTA.WAVES({
-          el: "#vanta-canvas", mouseControls: true, touchControls: true,
-          minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
-          color: 0x050505, shininess: 35.00, waveHeight: 15.00, waveSpeed: 0.60, zoom: 0.90
-        })
+        // 1. Daktilo (Typewriter) Efekti
+        const text = "Full Stack Solution Developer | .NET Specialist";
+        const typewriterElement = document.getElementById("typewriter");
+        let i = 0;
 
-        // Scroll Animations
-        const sr = ScrollReveal({ origin: 'bottom', distance: '60px', duration: 1200, delay: 200, reset: false });
+        function typeWriter() {
+            if (i < text.length) {
+                typewriterElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50); // Yazma hızı (ms)
+            }
+        }
+        // Sayfa yüklendiğinde daktiloyu başlat
+        window.onload = typeWriter;
 
-        sr.reveal('.reveal-hero');
-        sr.reveal('.reveal-about', { origin: 'left' });
-        sr.reveal('.reveal-tech', { origin: 'right' });
-        sr.reveal('.reveal-project', { interval: 200 });
-        sr.reveal('.reveal-footer');
+        // 2. Scroll Reveal (Aşağı kaydırdıkça elementlerin belirmesi)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var j = 0; j < reveals.length; j++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[j].getBoundingClientRect().top;
+                var elementVisible = 100; // Elementin ne kadar yukarıda görünmeye başlayacağı
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[j].classList.add("active");
+                    
+                    // Eğer bu element bir skill-box ise bar'ı doldur
+                    if(reveals[j].classList.contains("skill-box")) {
+                        let bar = reveals[j].querySelector(".skill-progress");
+                        if(bar) {
+                            bar.style.transform = `scaleX(${bar.getAttribute("data-width").replace('%', '') / 100})`;
+                        }
+                    }
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Sayfa ilk yüklendiğinde de kontrol et
     </script>
 </body>
 </html>
